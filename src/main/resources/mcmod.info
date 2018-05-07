@@ -1,0 +1,16 @@
+[
+{
+  "modid": "stepup",
+  "name": "StepUp",
+  "description": "3 options allow you to choose between no auto jump, Minecraft auto jump, and StepUp auto jump",
+  "version": "1.0.1-mc1.10-1.12.2",
+  "mcversion": "forge-1.12.2-14.23.2.2611",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["NotTooManyItems"],
+  "credits": "NotTooManyItems",
+  "logoFile": "logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
