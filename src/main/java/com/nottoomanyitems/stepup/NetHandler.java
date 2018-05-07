@@ -16,13 +16,13 @@ public class NetHandler {
     @SideOnly(value=Side.CLIENT)
     @SubscribeEvent
     public void clientConnectedToServer(FMLNetworkEvent.ClientConnectedToServerEvent event) {
-        Minecraft mainThread = Minecraft.func_71410_x();
-        mainThread.func_152344_a(new Runnable(){
+        Minecraft mainThread = Minecraft.getMinecraft();
+        mainThread.addScheduledTask(new Runnable(){
 
             @Override
             public void run() {
-                ServerData serverData = Minecraft.func_71410_x().func_147104_D();
-                NetHandler.serverIP = serverData != null ? serverData.field_78845_b.replace(".", "") : "0000";
+                ServerData serverData = Minecraft.getMinecraft().getCurrentServerData();
+                NetHandler.serverIP = serverData != null ? serverData.serverIP.replace(".", "") : "0000";
                 StepChanger.firstRun = true;
                 ConfigHandler.loadConfig();
             }
