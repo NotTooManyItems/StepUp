@@ -61,7 +61,8 @@ public final class StepChanger {
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
         if (myKey.isPressed()) {
-            if(autoJumpState == 0){autoJumpState = 1;
+            if(autoJumpState == 0){
+            	autoJumpState = 1;
             }else if(autoJumpState == 1){
             	autoJumpState = 2;
             }else if(autoJumpState == 2){
