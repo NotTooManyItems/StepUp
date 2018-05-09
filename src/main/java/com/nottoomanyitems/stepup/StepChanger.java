@@ -73,7 +73,7 @@ public final class StepChanger {
         }
     }
     
-    public void autoJump() {
+    private void autoJump() {
     	boolean b = mc.gameSettings.getOptionOrdinalValue(Options.AUTO_JUMP);
     	if(autoJumpState < 2 && b == true) {
     		mc.gameSettings.setOptionValue(Options.AUTO_JUMP, 0);
@@ -82,7 +82,7 @@ public final class StepChanger {
     	}
     }
     
-    public void message() {
+    private void message() {
     	String m = (Object)TextFormatting.DARK_AQUA + "[" + (Object)TextFormatting.YELLOW + "StepUp" + (Object)TextFormatting.DARK_AQUA + "]" + " ";
     	if(autoJumpState == 0) {
     		m = m + (Object)TextFormatting.GREEN + I18n.format("mod.stepup.enabled");
@@ -99,7 +99,7 @@ public final class StepChanger {
     	}
     }
     
-    public void updateMessage() {
+    private void updateMessage() {
     	String m2 = (Object)TextFormatting.GOLD + "Update Available: " + (Object)TextFormatting.DARK_AQUA + "[" + (Object)TextFormatting.YELLOW + "StepUp" + (Object)TextFormatting.WHITE + " v" + VersionChecker.getLatestVersion() + (Object)TextFormatting.DARK_AQUA + "]";
 		String url = "https://nottoomanyitems.wixsite.com/mods/step-up";
 		ClickEvent versionCheckChatClickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, url);
