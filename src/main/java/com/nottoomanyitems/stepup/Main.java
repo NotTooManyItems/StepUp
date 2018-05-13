@@ -13,7 +13,7 @@ public class Main {
     public static CommonProxy proxy;
     public static final String MODID = "stepup";
     public static final String MODNAME = "StepUp";
-    public static final String MODVERSION = "1.0.2";
+    public static final String MODVERSION = "1.0.3";
     public static final String VERSION = MODVERSION+"-mc1.10-1.12.2";
     
     @Mod.Instance

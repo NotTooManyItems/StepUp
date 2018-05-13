@@ -14,6 +14,7 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.event.ClickEvent;
+import net.minecraft.util.text.event.HoverEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
@@ -101,12 +102,14 @@ public final class StepChanger {
     }
     
     private void updateMessage() {
-    	String m2 = (Object)TextFormatting.GOLD + "Update Available: " + (Object)TextFormatting.DARK_AQUA + "[" + (Object)TextFormatting.YELLOW + "StepUp" + (Object)TextFormatting.WHITE + " v" + VersionChecker.getLatestVersion() + (Object)TextFormatting.DARK_AQUA + "]";
+    	String m2 = (Object)TextFormatting.GOLD + I18n.format("mod.stepup.updateAvailable") + ": " + (Object)TextFormatting.DARK_AQUA + "[" + (Object)TextFormatting.YELLOW + "StepUp" + (Object)TextFormatting.WHITE + " v" + VersionChecker.getLatestVersion() + (Object)TextFormatting.DARK_AQUA + "]";
 		String url = "https://nottoomanyitems.wixsite.com/mods/step-up";
 		ClickEvent versionCheckChatClickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, url);
+		HoverEvent versionCheckChatHoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString(I18n.format("mod.stepup.updateTooltip") + "!"));
 		TextComponentString component = new TextComponentString(m2);
 		Style s = component.getStyle();
 		s.setClickEvent(versionCheckChatClickEvent);
+		s.setHoverEvent(versionCheckChatHoverEvent);
 		component.setStyle(s);
 		player.sendMessage((ITextComponent) component);
     }
