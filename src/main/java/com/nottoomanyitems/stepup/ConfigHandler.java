@@ -1,22 +1,16 @@
 package com.nottoomanyitems.stepup;
 
-import com.nottoomanyitems.stepup.NetHandler;
-import com.nottoomanyitems.stepup.StepChanger;
+import com.nottoomanyitems.stepup.mixins.NetHandler;
+import de.guntram.mcmod.rifttools.ConfigChangedEvent;
+import de.guntram.mcmod.rifttools.Configuration;
+import de.guntram.mcmod.rifttools.ModConfigurationHandler;
 import java.io.File;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.EventBus;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class ConfigHandler {
+public class ConfigHandler implements ModConfigurationHandler {
     public static Configuration config;
 
-    public static void load(FMLPreInitializationEvent event) {
-        config = new Configuration(event.getSuggestedConfigurationFile());
-        FMLCommonHandler.instance().bus().register((Object)new ConfigHandler());
+    public static void load(File file) {
+        config = new Configuration(file);
     }
 
     public static void reloadConfig() {
@@ -26,23 +20,27 @@ public class ConfigHandler {
     }
 
     public static void loadConfig() {
-    	Property state = config.get(NetHandler.serverIP, "autoJumpState", "0");
-    	StepChanger.autoJumpState = state.getInt();
+    	StepChanger.autoJumpState = config.getInt(StepChanger.serverIP,
+                Configuration.CATEGORY_CLIENT, 0, 0, 2, "autoJump state on this server");
+        System.out.println("setting state on "+StepChanger.serverIP+" to "+StepChanger.autoJumpState);
         ConfigHandler.reloadConfig();
     }
 
     public static void changeConfig() {
-    	String autoJumpState = Integer.toString(StepChanger.autoJumpState);
-    	Property b = config.get(NetHandler.serverIP, "autoJumpState", autoJumpState);
-        b.set(autoJumpState);
+        config.setValue(StepChanger.serverIP, StepChanger.autoJumpState);
         ConfigHandler.reloadConfig();
     }
 
-    @SubscribeEvent
+    @Override
     public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equals("stepup")) {
             ConfigHandler.reloadConfig();
         }
+    }
+
+    @Override
+    public Configuration getConfig() {
+        return config;
     }
 }
 
