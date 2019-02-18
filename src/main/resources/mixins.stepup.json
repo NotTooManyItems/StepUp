@@ -1,0 +1,12 @@
+{
+    "required": true,
+    "package": "com.nottoomanyitems.stepup.mixins",
+    "refmap": "mixins.stepup.refmap.json",
+    "minVersion": "0.6",
+    "client": [
+        "NetHandler"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

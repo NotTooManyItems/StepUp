@@ -1,0 +1,11 @@
+{
+    "id": "stepup",
+    "name": "StepUp",
+    "authors": [
+        "NotTooManyItems"
+    ],
+    "listeners": [
+        "com.nottoomanyitems.stepup.StepChanger",
+        "com.nottoomanyitems.stepup.Main"
+    ]
+}

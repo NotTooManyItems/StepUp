@@ -1,43 +1,44 @@
 package com.nottoomanyitems.stepup;
 
-import com.nottoomanyitems.stepup.ConfigHandler;
-
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import net.minecraft.client.GameSettings.Options;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ChatLine;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.settings.GameSettings;
-import net.minecraft.client.settings.GameSettings.Options;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.event.ClickEvent;
-import net.minecraft.util.text.event.HoverEvent;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
+import org.dimdev.rift.listener.client.ClientTickable;
+import org.dimdev.rift.listener.client.KeyBindingAdder;
+import org.dimdev.rift.listener.client.KeybindHandler;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_J;
 
-public final class StepChanger {
-    private static EntityPlayer player;
-    public static KeyBinding myKey;
+public final class StepChanger implements KeyBindingAdder, KeybindHandler, ClientTickable {
+    public KeyBinding myKey;
     public static int autoJumpState = -1; //0 StepUp, 1 None, 2 Minecraft
-    public static Boolean firstRun = true;
+    public static boolean firstRun = true;
+    public static String serverIP;
     private String mc_version;
     
-    private Minecraft mc = Minecraft.getMinecraft();
+    private Minecraft mc;
 
-    public static void createKey() {
-        myKey = new KeyBinding("Toggle StepUp", 36, "StepUp");
-        ClientRegistry.registerKeyBinding((KeyBinding)myKey);
+    @Override
+    public Collection<? extends KeyBinding> getKeyBindings() {
+        List<KeyBinding> myBindings=new ArrayList();
+        myBindings.add(myKey = new KeyBinding("Toggle StepUp", GLFW_KEY_J, "StepUp"));
+        return myBindings;
     }
 
-    @SubscribeEvent
-    public void tickEvent(TickEvent.PlayerTickEvent event) {
-    	boolean b = mc.gameSettings.getOptionOrdinalValue(Options.AUTO_JUMP);
-        player = event.player;
+    @Override
+    public void clientTick(Minecraft client) {
+        EntityPlayerSP player;
+        mc=client;      // can't do this in onInit because mixins need to be applied first
+        player = client.player;
+        if (player==null)
+            return;
         if(player.isSneaking()) {
         	player.stepHeight = .6f;
         }else if(autoJumpState == 0 && player.stepHeight < 1.0f){
@@ -48,19 +49,16 @@ public final class StepChanger {
         	player.stepHeight = .6f;
         }
         autoJump();
-        
+
         if (firstRun && autoJumpState != -1) {
-        	mc_version = Minecraft.getMinecraft().getVersion();
-        	if(!Main.versionChecker.isLatestVersion()) {
-        		updateMessage();
-        	}
+        	mc_version = Minecraft.getInstance().getVersion();
         	message();
             firstRun = false;
         }
     }
 
-    @SubscribeEvent
-    public void onKeyInput(InputEvent.KeyInputEvent event) {
+    @Override
+    public void processKeybinds() {
         if (myKey.isPressed()) {
             if(autoJumpState == 0){
             	autoJumpState = 1;
@@ -95,23 +93,10 @@ public final class StepChanger {
     	}
     	
     	if(mc_version.contains("1.12")){
-    		player.sendStatusMessage(new TextComponentString(m), true);
+    		mc.player.sendStatusMessage(new TextComponentString(m), true);
     	}else {
-    		player.sendMessage((ITextComponent)new TextComponentString(m));
+    		mc.player.sendMessage((ITextComponent)new TextComponentString(m));
     	}
-    }
-    
-    private void updateMessage() {
-    	String m2 = (Object)TextFormatting.GOLD + I18n.format("mod.stepup.updateAvailable") + ": " + (Object)TextFormatting.DARK_AQUA + "[" + (Object)TextFormatting.YELLOW + "StepUp" + (Object)TextFormatting.WHITE + " v" + VersionChecker.getLatestVersion() + (Object)TextFormatting.DARK_AQUA + "]";
-		String url = "https://nottoomanyitems.wixsite.com/mods/step-up";
-		ClickEvent versionCheckChatClickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, url);
-		HoverEvent versionCheckChatHoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString(I18n.format("mod.stepup.updateTooltip") + "!"));
-		TextComponentString component = new TextComponentString(m2);
-		Style s = component.getStyle();
-		s.setClickEvent(versionCheckChatClickEvent);
-		s.setHoverEvent(versionCheckChatHoverEvent);
-		component.setStyle(s);
-		player.sendMessage((ITextComponent) component);
     }
 }
 
