@@ -1,17 +1,18 @@
 package com.nottoomanyitems.stepup;
 
-import de.guntram.mcmod.rifttools.ConfigurationProvider;
-import org.dimdev.riftloader.listener.InitializationListener;
-import org.spongepowered.asm.launch.MixinBootstrap;
-import org.spongepowered.asm.mixin.Mixins;
+import de.guntram.mcmod.fabrictools.ConfigurationProvider;
+import de.guntram.mcmod.fabrictools.KeyBindingManager;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 
-public class Main implements InitializationListener {
+public class Main implements ClientModInitializer {
     @Override
-    public void onInitialization() {
-        MixinBootstrap.init();
-        Mixins.addConfiguration("mixins.stepup.json");
-        Mixins.addConfiguration("mixins.rifttools-de-guntram.json");
+    public void onInitializeClient() {
         ConfigurationProvider.register("StepUp", new ConfigHandler());
-        ConfigHandler.load(ConfigurationProvider.getSuggestedFile("StepUp"));
+        ConfigHandler.load(ConfigurationProvider.getSuggestedFile("stepup"));
+        StepChanger stepChanger = new StepChanger();
+        stepChanger.setKeyBindings();
+        ClientTickCallback.EVENT.register(stepChanger);
+        KeyBindingManager.register(stepChanger);
     }
 }
