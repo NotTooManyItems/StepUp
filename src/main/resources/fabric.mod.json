@@ -1,0 +1,31 @@
+{
+    "schemaVersion": 1,
+    "id": "stepup",
+    "version": "11.14-fabric0.2.7-1.0.2",
+    "environment": "client",
+    "entrypoints": {
+        "client": [ "com.nottoomanyitems.stepup.Main" ],
+        "modmenu": [ "com.nottoomanyitems.stepup.MMConfigurationHandler" ]
+    },
+    "custom": {
+        "modmenu:clientsideOnly": true
+    },
+    "mixins": [
+      	"mixins.stepup.json"
+    ],
+    "depends": {
+      "fabric": "*"
+    },
+    "recommends": {
+      "modmenu" : "*"
+    },
+    "name": "StepUp",
+    "description": "Quickly switch betwenn autojump and different step heights",
+    "icon": "pack.png",
+    "authors": [ "NotTooManyItems" ],
+    "contact": {
+        "homepage": "https://minecraft.curseforge.com/projects/stepup",
+        "sources": "https://github.com/NotTooManyItems/StepUp",
+        "issues": "https://github.com/NotTooManyItems/StepUp/issues"
+    }
+}

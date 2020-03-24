@@ -4,5 +4,7 @@
     "mod.stepup.enabled":"Enabled",
     "mod.stepup.disabled":"Disabled",
     "mod.stepup.updateAvailable":"Update Available",
-    "mod.stepup.updateTooltip":"Click here to update from official website"
+    "mod.stepup.updateTooltip":"Click here to update from official website",
+    "key.categories.stepup" : "StepUp",
+    "key.stepup.toggle" : "Toggle"
 }

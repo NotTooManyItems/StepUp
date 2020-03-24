@@ -1,9 +1,8 @@
 package com.nottoomanyitems.stepup;
 
-import com.nottoomanyitems.stepup.mixins.NetHandler;
-import de.guntram.mcmod.rifttools.ConfigChangedEvent;
-import de.guntram.mcmod.rifttools.Configuration;
-import de.guntram.mcmod.rifttools.ModConfigurationHandler;
+import de.guntram.mcmod.fabrictools.ConfigChangedEvent;
+import de.guntram.mcmod.fabrictools.Configuration;
+import de.guntram.mcmod.fabrictools.ModConfigurationHandler;
 import java.io.File;
 
 public class ConfigHandler implements ModConfigurationHandler {
