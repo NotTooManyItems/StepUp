@@ -1,0 +1,9 @@
+{
+    "key.stepup.desc": "Toggle StepUp",
+    "key.categories.stepup": "Toggle StepUp",
+    "msg.stepup.disabled": "0 - All Disabled",
+    "msg.stepup.enabled": "1 - StepUp Enabled",
+    "msg.stepup.minecraft": "2 - Minecraft Jump Enabled",
+    "msg.stepup.updateAvailable": "A new version of StepUp is available",
+    "msg.stepup.config.desc": "The Current State of SteupUp\r 0 All Disabled,\r 1 StepUp Enabled,\r 2 Minecraft Jump Enabled"
+}
