@@ -1,12 +1,9 @@
 package com.nottoomanyitems.stepup.worker;
 
-import org.apache.logging.log4j.Logger;
-
 import com.nottoomanyitems.stepup.StepUp;
 import com.nottoomanyitems.stepup.config.ConfigIO;
+import com.nottoomanyitems.stepup.config.VersionChecker;
 import com.nottoomanyitems.stepup.init.KeyBindings;
-
-import org.apache.logging.log4j.LogManager;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
@@ -29,9 +26,9 @@ public class StepChanger {
 
     private static Minecraft mc = Minecraft.getInstance();
 
-    private static final Logger LOGGER = LogManager.getLogger();
-    
-    public StepChanger() {}
+    public StepChanger() {
+        
+    }
 
     public static void TickEvent(PlayerTickEvent event) {
         player = event.player;
@@ -47,18 +44,15 @@ public class StepChanger {
             player.stepHeight = .6f;
         }
         autoJump();
-
-        if (StepUp.firstRun && autoJumpState != -1) {
-        	StepUp.MC_VERSION = mc.getVersion();
-            //if (!StepUp.versionChecker.isLatestVersion()) {
-            //    updateMessage();
-            //}
-            //message();
-            StepUp.firstRun = false;
-        }
     }
 
     public static void init() {
+    	if(StepUp.firstRun) {
+            if (VersionChecker.isLatestVersion() == false) {
+                updateMessage();
+            }
+            StepUp.firstRun = false;
+    	}
     	ConfigIO.CheckForServerIP();
     	autoJump();
         message();
@@ -68,7 +62,7 @@ public class StepChanger {
     public static void onKeyInput(KeyInputEvent event) {
     	int autoJumpState = ConfigIO.autoJumpState;
 
-        if (KeyBindings.KEYBINDINGS[0].isPressed()) {//(event.getKey() == 36) {
+        if (KeyBindings.KEYBINDINGS[0].isPressed()) {	//(event.getKey() == 36) HOME KEY
             if (autoJumpState == AutoJumpState.MINECRAFT.getLevelCode()) {
             	ConfigIO.autoJumpState = AutoJumpState.DISABLED.getLevelCode(); //0 StepUp and Minecraft Disabled
             } else if (autoJumpState == AutoJumpState.DISABLED.getLevelCode()) {
@@ -80,11 +74,6 @@ public class StepChanger {
             autoJump();
             message();
         }
-        
-       /* if (StepUp.inti == true) {
-        	StepUp.inti = false;
-        	init();
-        	}*/
     }
 
     private static void autoJump() {
@@ -112,12 +101,12 @@ public class StepChanger {
 
         player.sendMessage((ITextComponent) new StringTextComponent(m));
     }
-
-    private void updateMessage() {
-        String m2 = (Object) TextFormatting.GOLD + I18n.format("mod.stepup.updateAvailable") + ": " + (Object) TextFormatting.DARK_AQUA + "[" + (Object) TextFormatting.YELLOW + "StepUp" + (Object) TextFormatting.WHITE + " v" + "" + (Object) TextFormatting.DARK_AQUA + "]";
-        String url = "https://nottoomanyitems.wixsite.com/mods/step-up";
+    
+    private static void updateMessage() {
+        String m2 = (Object) TextFormatting.GOLD + I18n.format("msg.stepup.updateAvailable") + ": " + (Object) TextFormatting.DARK_AQUA + "[" + (Object) TextFormatting.YELLOW + "StepUp-" + (Object) TextFormatting.WHITE + VersionChecker.getLatestVersion() + (Object) TextFormatting.DARK_AQUA + "]";
+        String url = "https://www.curseforge.com/minecraft/mc-mods/stepup/files";
         ClickEvent versionCheckChatClickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, url);
-        HoverEvent versionCheckChatHoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new StringTextComponent(I18n.format("mod.stepup.updateTooltip") + "!"));
+        HoverEvent versionCheckChatHoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new StringTextComponent(I18n.format("msg.stepup.updateTooltip") + "!"));
         TextComponent component = new StringTextComponent(m2);
         Style s = component.getStyle();
         s.setClickEvent(versionCheckChatClickEvent);

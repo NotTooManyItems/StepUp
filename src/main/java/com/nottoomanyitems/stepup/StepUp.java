@@ -1,6 +1,5 @@
 package com.nottoomanyitems.stepup;
 
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 
 import java.nio.file.Files;
@@ -10,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.nottoomanyitems.stepup.config.ConfigIO;
+import com.nottoomanyitems.stepup.config.VersionChecker;
 import com.nottoomanyitems.stepup.worker.StepChanger;
 
 import net.minecraft.client.Minecraft;
@@ -21,39 +21,28 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.config.ModConfig.ModConfigEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(StepUp.MODID)
 public class StepUp {
     public static final String MODID = "stepup";
-	public static final String MOD_VERSION = "2.0.0";
+	public static final String MOD_VERSION = "1.14.4-0.1.0";
 	public static final String MOD_NAME = "StepUp";
 	public static final String CONFIG_FILE = MODID+".cfg";
-	public static boolean firstRun = false;
+	public static boolean firstRun = true;
 	public static boolean init = true;
 	public static String MC_VERSION;
 	
 	private static final Logger LOGGER = LogManager.getLogger();
 	
-	private static Minecraft mc = Minecraft.getInstance();
-
-    public StepUp() {
+	public StepUp() {
     	if (Files.notExists(Paths.get("config", CONFIG_FILE))){
     		ConfigIO.createCFG();
         }
-    	firstRun = true;
-        //ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, StepUpConfig.CLIENTSPEC,CONFIG_FILE);
-        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::loadComplete);
+    	MC_VERSION = Minecraft.getInstance().getVersion();
+    	VersionChecker versionChecker = new VersionChecker();
+        Thread versionCheckThread = new Thread(versionChecker, "Version Check");
+        versionCheckThread.start();
     }
-	
-    /*private void loadComplete(FMLLoadCompleteEvent event) {
-		finishedLoading = true;
-		//StepChanger.init();
-		LOGGER.info("loadComplete");
-	}*/
     
     @EventBusSubscriber(value = Dist.CLIENT)
     public static class ClientEventHandler {
@@ -77,14 +66,7 @@ public class StepUp {
         
         @SubscribeEvent
         public static void joinWorld(final EntityJoinWorldEvent event) {
-        	//StepChanger.init();
         }
-        
-        /*@SubscribeEvent
-        public static void loadComplete(FMLLoadCompleteEvent event) {
-        	LOGGER.debug("loadComplete");
-        }
-        */
         
         @SubscribeEvent
         public static void unload (WorldEvent.Unload event) {
@@ -95,8 +77,6 @@ public class StepUp {
         @SubscribeEvent
         public static void load (WorldEvent.Load event) {
         	LOGGER.info("WorldEvent.Load");
-        	//StepUpConfig.CLIENT.autoJumpState.get();
-        	//StepChanger.init();
         }
     }
 }

@@ -15,19 +15,19 @@ loaderVersion="[28,)" #mandatory (28 is current forge version)
 modId="stepup" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
 version="${version}" #mandatory
-state="experimental"
+state="Working"
  # A display name for the mod
 displayName="StepUp" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
 #updateJSONURL="http://myurl.me/" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-#displayURL="http://example.com/" #optional
+displayURL="https://www.curseforge.com/minecraft/mc-mods/stepup" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="logo.png" #optional
 # A text field displayed in the mod UI
-credits="NotTooManyItems" #optional
+credits="NotTooManyItems, frakier" #optional
 # A text field displayed in the mod UI
-authors="NotTooManyItems" #optional
+authors="NotTooManyItems, frakier" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 3 options allow you to choose between no auto jump, Minecraft auto jump, and StepUp auto jump

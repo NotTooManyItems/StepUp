@@ -119,7 +119,6 @@ public class ConfigIO
         String oldContent = "";
         BufferedReader reader = null;
         FileWriter writer = null;
-        String newString = "    S:autoJumpState="+Integer.toString(autoJumpState);
          
         try
         {
