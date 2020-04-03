@@ -14,7 +14,7 @@ import org.lwjgl.glfw.GLFW;
 public class KeyBindings {
 
     public static final KeyBinding[] KEYBINDINGS = {
-        new KeyBinding("key.stepup.desc", GLFW.GLFW_KEY_HOME, "key.categories.stepup")
+        new KeyBinding("key.stepup.desc", GLFW.GLFW_KEY_H, "key.categories.stepup")
     };
 
     @SubscribeEvent
