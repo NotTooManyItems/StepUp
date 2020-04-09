@@ -25,7 +25,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 @Mod(StepUp.MODID)
 public class StepUp {
     public static final String MODID = "stepup";
-	public static final String MOD_VERSION = "1.14.4-0.1.0";
+	public static final String MOD_VERSION = "1.15.2-0.1.0";
 	public static final String MOD_NAME = "StepUp";
 	public static final String CONFIG_FILE = MODID+".cfg";
 	public static boolean firstRun = true;

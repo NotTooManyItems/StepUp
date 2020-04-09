@@ -27,7 +27,7 @@ logoFile="logo.png" #optional
 # A text field displayed in the mod UI
 credits="NotTooManyItems, frakier" #optional
 # A text field displayed in the mod UI
-authors="NotTooManyItems, frakier" #optional
+authors="NotTooManyItems" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 3 options allow you to choose between no auto jump, Minecraft auto jump, and StepUp auto jump
@@ -48,6 +48,6 @@ description='''
 [[dependencies.stepup]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.14.4]"
+    versionRange="[1.15.2]"
     ordering="NONE"
-    side="BOTH"
+    side="CLIENT"
