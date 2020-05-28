@@ -13,10 +13,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
  
-public class ConfigIO
-{   
-	public static String filePath = "config/"+ StepUp.CONFIG_FILE;
+public class ConfigIO{
+	public static String CONFIG_FILE = StepUp.MODID+".cfg";
+	public static String filePath = "config/"+ CONFIG_FILE;
 	public static String serverIP;
     public static int autoJumpState;
 
@@ -55,6 +57,10 @@ public class ConfigIO
     }
 	
 	public static void CheckForServerIP() {
+		if (Files.notExists(Paths.get("config", CONFIG_FILE))){
+    		ConfigIO.createCFG();
+        }
+		
 		ServerIP();
 		
 		File fileToBeModified = new File(filePath);
