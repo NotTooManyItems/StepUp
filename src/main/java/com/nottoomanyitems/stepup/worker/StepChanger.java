@@ -23,6 +23,8 @@ public class StepChanger {
 	
 	public static PlayerEntity player;
     public KeyBinding myKey;
+    public static boolean firstRun = true;
+    private static boolean forceStepUp = true;
 
     private static Minecraft mc = Minecraft.getInstance();
 
@@ -36,23 +38,27 @@ public class StepChanger {
         
 		if (player.isSneaking()) {
             player.stepHeight = .6f;
-        } else if (autoJumpState == 0 && player.stepHeight >= 1.0f) { //All Disabled
+        } else if (autoJumpState == 0 && player.stepHeight >= 1.0f && forceStepUp == true) { //All Disabled
         	player.stepHeight = .6f;
+        	forceStepUp = false;
         } else if (autoJumpState == 1 && player.stepHeight < 1.0f) { //StepUp Enabled
             player.stepHeight = 1.25f;
+            forceStepUp = true;
         } else if (autoJumpState == 2 && player.stepHeight >= 1.0f) { //Minecraft Enabled
             player.stepHeight = .6f;
+            forceStepUp = true;
         }
         autoJump();
     }
 
     public static void init() {
-    	if(StepUp.firstRun) {
+    	if(firstRun) {
             if (VersionChecker.isLatestVersion() == false) {
                 updateMessage();
             }
-            StepUp.firstRun = false;
+            firstRun = false;
     	}
+    	player.sendMessage((ITextComponent) new StringTextComponent("IsLatestVersion:"+VersionChecker.isLatestVersion()+", LatestVersion:"+VersionChecker.getLatestVersion()));//TESTING
     	ConfigIO.CheckForServerIP();
     	autoJump();
         message();

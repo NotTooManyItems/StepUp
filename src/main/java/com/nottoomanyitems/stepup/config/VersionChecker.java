@@ -31,23 +31,23 @@ public class VersionChecker implements Runnable
             in = new URL("https://pastebin.com/raw/UjXHHABv").openStream();
         }catch (MalformedURLException e){
             // TODO Auto-generated catch block
-        	isLatestVersion = true;
+        	//isLatestVersion = true;
         	IOUtils.closeQuietly(in);
-        	return;
+        	//return;
         }catch (IOException e){
             // TODO Auto-generated catch block
-        	isLatestVersion = true;
+        	//isLatestVersion = true;
         	IOUtils.closeQuietly(in);
-        	return;
+        	//return;
         }
 
         try{
             latestVersion = IOUtils.readLines(in).get(0);
         }catch (IOException e){
             // TODO Auto-generated catch block
-        	isLatestVersion = true;
+        	//isLatestVersion = true;
         	IOUtils.closeQuietly(in);
-            return;
+            //return;
         }finally{
             IOUtils.closeQuietly(in);
         }
