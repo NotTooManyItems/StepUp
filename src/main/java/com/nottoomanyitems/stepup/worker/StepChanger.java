@@ -58,7 +58,6 @@ public class StepChanger {
             }
             firstRun = false;
     	}
-    	player.sendMessage((ITextComponent) new StringTextComponent("IsLatestVersion:"+VersionChecker.isLatestVersion()+", LatestVersion:"+VersionChecker.getLatestVersion()));//TESTING
     	ConfigIO.CheckForServerIP();
     	autoJump();
         message();
