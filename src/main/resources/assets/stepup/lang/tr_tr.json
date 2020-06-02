@@ -1,0 +1,10 @@
+{
+    "key.stepup.desc": "StepUp'ı Aç/Kapa",
+    "key.categories.stepup": "StepUp'ı Aç/Kapa",
+    "msg.stepup.disabled": "Tümü Devre Dışı",
+    "msg.stepup.enabled": "StepUp Etkinleştirildi",
+    "msg.stepup.minecraft": "Minecraft Otomatik Zıplama Etkinleştirildi",
+    "msg.stepup.updateAvailable": "StepUp'ın yeni sürümü mevcut",
+    "msg.stepup.updateTooltip": "CurseForge'dan güncellemek için buraya tıkla",
+    "msg.stepup.config.desc": "StepUp'ın Şu Anki Durumu\r 0 Tümü Devre Dışı,\r 1 StepUp Etkinleştirildi,\r 2 Minecraft Otomatik Zıplama Etkinleştirildi"
+}
