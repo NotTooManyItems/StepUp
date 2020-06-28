@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Util;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.Style;
@@ -41,6 +42,7 @@ public class StepChanger {
         } else if (autoJumpState == 0 && player.stepHeight >= 1.0f && forceStepUp == true) { //All Disabled
         	player.stepHeight = .6f;
         	forceStepUp = false;
+        	//player.sendMessage((ITextComponent) new StringTextComponent("ASDJKJKJSD"), Util.field_240973_b_);
         } else if (autoJumpState == 1 && player.stepHeight < 1.0f) { //StepUp Enabled
             player.stepHeight = 1.25f;
             forceStepUp = true;
@@ -104,20 +106,20 @@ public class StepChanger {
             m = m + (Object) TextFormatting.GREEN + I18n.format(AutoJumpState.MINECRAFT.getDesc());
         }
 
-        player.sendMessage((ITextComponent) new StringTextComponent(m));
+        player.sendMessage((ITextComponent) new StringTextComponent(m), Util.field_240973_b_);
     }
     
     private static void updateMessage() {
         String m2 = (Object) TextFormatting.GOLD + I18n.format("msg.stepup.updateAvailable") + ": " + (Object) TextFormatting.DARK_AQUA + "[" + (Object) TextFormatting.YELLOW + "StepUp-" + (Object) TextFormatting.WHITE + VersionChecker.getLatestVersion() + (Object) TextFormatting.DARK_AQUA + "]";
         String url = "https://www.curseforge.com/minecraft/mc-mods/stepup/files";
         ClickEvent versionCheckChatClickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, url);
-        HoverEvent versionCheckChatHoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new StringTextComponent(I18n.format("msg.stepup.updateTooltip") + "!"));
+        HoverEvent versionCheckChatHoverEvent = new HoverEvent(HoverEvent.Action.field_230550_a_, new StringTextComponent(I18n.format("msg.stepup.updateTooltip") + "!"));
         TextComponent component = new StringTextComponent(m2);
         Style s = component.getStyle();
-        s.setClickEvent(versionCheckChatClickEvent);
-        s.setHoverEvent(versionCheckChatHoverEvent);
-        component.setStyle(s);
-        player.sendMessage((ITextComponent) component);
+        s.func_240715_a_(versionCheckChatClickEvent);	//setClickEvent
+        s.func_240716_a_(versionCheckChatHoverEvent);	//setHoverEvent
+        component.func_230530_a_(s);
+        player.sendMessage((ITextComponent) component, Util.field_240973_b_);
     }
     
     public enum AutoJumpState

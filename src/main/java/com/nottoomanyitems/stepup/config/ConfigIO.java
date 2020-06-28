@@ -5,6 +5,7 @@ import com.nottoomanyitems.stepup.worker.StepChanger;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.util.Util;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
@@ -168,6 +169,6 @@ public class ConfigIO{
     }
     
     public static void debugMessage(String m) {
-    	StepChanger.player.sendMessage((ITextComponent) new StringTextComponent(m));
+    	StepChanger.player.sendMessage((ITextComponent) new StringTextComponent(m), Util.field_240973_b_);
     }
 }
