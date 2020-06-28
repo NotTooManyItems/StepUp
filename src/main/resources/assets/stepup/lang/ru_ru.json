@@ -1,0 +1,10 @@
+{
+    "key.stepup.desc": "StepUp'ı Aç/Kapa",
+    "key.categories.stepup": "StepUp'ı Aç/Kapa",
+    "msg.stepup.disabled": "Выключен",
+    "msg.stepup.enabled": "StepUp Включен",
+    "msg.stepup.minecraft": "Minecraft Авто Прыжок",
+    "msg.stepup.updateAvailable": "Доступно обновление",
+    "msg.stepup.updateTooltip": "Нажмите здесь, чтобы скачать обновление с официального сайта",
+    "msg.stepup.config.desc": "The Current State of StepUp\r 0 All Disabled,\r 1 StepUp Enabled,\r 2 Minecraft Jump Enabled"
+}
