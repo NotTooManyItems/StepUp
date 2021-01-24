@@ -17,7 +17,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 public final class StepUp {
     public static final String MODID = "stepup";
   
-	public static final String MOD_VERSION = "1.16.4-0.1.0";
+	public static final String MOD_VERSION = "1.16.4-0.2.0";
 	public static final String MOD_NAME = "StepUp";
 	public static String MC_VERSION;
 	
