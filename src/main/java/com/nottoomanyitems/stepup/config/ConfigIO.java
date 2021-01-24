@@ -169,6 +169,6 @@ public class ConfigIO{
     }
     
     public static void debugMessage(String m) {
-    	StepChanger.player.sendMessage((ITextComponent) new StringTextComponent(m), Util.field_240973_b_);
+    	StepChanger.player.sendMessage((ITextComponent) new StringTextComponent(m), Util.DUMMY_UUID);
     }
 }

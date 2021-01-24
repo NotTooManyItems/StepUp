@@ -106,20 +106,20 @@ public class StepChanger {
             m = m + (Object) TextFormatting.GREEN + I18n.format(AutoJumpState.MINECRAFT.getDesc());
         }
 
-        player.sendMessage((ITextComponent) new StringTextComponent(m), Util.field_240973_b_);
+        player.sendMessage((ITextComponent) new StringTextComponent(m), Util.DUMMY_UUID);
     }
     
     private static void updateMessage() {
         String m2 = (Object) TextFormatting.GOLD + I18n.format("msg.stepup.updateAvailable") + ": " + (Object) TextFormatting.DARK_AQUA + "[" + (Object) TextFormatting.YELLOW + "StepUp-" + (Object) TextFormatting.WHITE + VersionChecker.getLatestVersion() + (Object) TextFormatting.DARK_AQUA + "]";
         String url = "https://www.curseforge.com/minecraft/mc-mods/stepup/files";
         ClickEvent versionCheckChatClickEvent = new ClickEvent(ClickEvent.Action.OPEN_URL, url);
-        HoverEvent versionCheckChatHoverEvent = new HoverEvent(HoverEvent.Action.field_230550_a_, new StringTextComponent(I18n.format("msg.stepup.updateTooltip") + "!"));
+        HoverEvent versionCheckChatHoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new StringTextComponent(I18n.format("msg.stepup.updateTooltip") + "!"));
         TextComponent component = new StringTextComponent(m2);
         Style s = component.getStyle();
-        s.func_240715_a_(versionCheckChatClickEvent);	//setClickEvent
-        s.func_240716_a_(versionCheckChatHoverEvent);	//setHoverEvent
-        component.func_230530_a_(s);
-        player.sendMessage((ITextComponent) component, Util.field_240973_b_);
+        s.setClickEvent(versionCheckChatClickEvent);	//setClickEvent
+        s.setHoverEvent(versionCheckChatHoverEvent);	//setHoverEvent
+        component.setStyle(s);
+        player.sendMessage((ITextComponent) component, Util.DUMMY_UUID);
     }
     
     public enum AutoJumpState
