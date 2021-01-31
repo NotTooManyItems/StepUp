@@ -2,6 +2,7 @@ package com.nottoomanyitems.stepup.worker;
 
 import com.nottoomanyitems.stepup.StepUp;
 import com.nottoomanyitems.stepup.config.ConfigIO;
+import com.nottoomanyitems.stepup.config.Configuration;
 import com.nottoomanyitems.stepup.config.VersionChecker;
 import com.nottoomanyitems.stepup.init.KeyBindings;
 
@@ -42,7 +43,6 @@ public class StepChanger {
         } else if (autoJumpState == 0 && player.stepHeight >= 1.0f && forceStepUp == true) { //All Disabled
         	player.stepHeight = .6f;
         	forceStepUp = false;
-        	//player.sendMessage((ITextComponent) new StringTextComponent("ASDJKJKJSD"), Util.field_240973_b_);
         } else if (autoJumpState == 1 && player.stepHeight < 1.0f) { //StepUp Enabled
             player.stepHeight = 1.25f;
             forceStepUp = true;
@@ -55,21 +55,23 @@ public class StepChanger {
 
     public static void init() {
     	if(firstRun) {
-            if (VersionChecker.isLatestVersion() == false) {
+            if (Configuration.CLIENT.showStepUpInfoOnWorldJoin.get() && VersionChecker.isLatestVersion() == false) {
                 updateMessage();
             }
             firstRun = false;
     	}
     	ConfigIO.CheckForServerIP();
     	autoJump();
-        message();
+        if (Configuration.CLIENT.showStepUpInfoOnWorldJoin.get()) {
+            message();
+        }
     }
     
     //@SubscribeEvent
     public static void onKeyInput(KeyInputEvent event) {
     	int autoJumpState = ConfigIO.autoJumpState;
 
-        if (KeyBindings.KEYBINDINGS[0].isPressed()) {	//(event.getKey() == 36) HOME KEY
+        if (KeyBindings.KEYBINDINGS[0].isPressed()) {
             if (autoJumpState == AutoJumpState.MINECRAFT.getLevelCode()) {
             	ConfigIO.autoJumpState = AutoJumpState.DISABLED.getLevelCode(); //0 StepUp and Minecraft Disabled
             } else if (autoJumpState == AutoJumpState.DISABLED.getLevelCode()) {

@@ -6,5 +6,7 @@
     "msg.stepup.minecraft": "Minecraft AutoJump Enabled",
     "msg.stepup.updateAvailable": "A new version of StepUp is available",
     "msg.stepup.updateTooltip": "Click here to update from CurseForge",
-    "msg.stepup.config.desc": "The Current State of StepUp\r 0 All Disabled,\r 1 StepUp Enabled,\r 2 Minecraft Jump Enabled"
+    "msg.stepup.config.desc": "The Current State of StepUp\r 0 All Disabled,\r 1 StepUp Enabled,\r 2 Minecraft Jump Enabled",
+    "config.stepup.showStepUpInfoOnWorldJoin": "Show StepUp information when joining world.",
+    "config.stepup.showStepUpInfoOnWorldJoin.tooltip": "Whether info about StepUp will be show when joining a world."
 }
