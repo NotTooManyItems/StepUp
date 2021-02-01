@@ -1,6 +1,8 @@
 package com.nottoomanyitems.stepup;
 
+import com.nottoomanyitems.stepup.config.Configuration;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 
 import com.nottoomanyitems.stepup.Client.ClientProxy;
@@ -19,11 +21,11 @@ public final class StepUp {
   
 	public static final String MOD_VERSION = "1.16.4-0.2.0";
 	public static final String MOD_NAME = "StepUp";
-	public static String MC_VERSION;
 	
 	public static final StepUpProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 	
 	public StepUp() {
+		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_SPEC);
     }
 	
 	@SubscribeEvent
