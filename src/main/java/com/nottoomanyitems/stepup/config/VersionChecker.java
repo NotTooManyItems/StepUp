@@ -28,7 +28,7 @@ public class VersionChecker implements Runnable
     {
         InputStream in = null;
         try{
-            in = new URL("https://pastebin.com/raw/75eHG4w4").openStream();
+            in = new URL("https://pastebin.com/raw/xbERKTgG").openStream();
         }catch (MalformedURLException e){
             // TODO Auto-generated catch block
         	isLatestVersion = true;
@@ -55,7 +55,6 @@ public class VersionChecker implements Runnable
         if(StepUp.MOD_VERSION.equals(latestVersion)) {
         	isLatestVersion = true;
     	}
-        System.out.println("Are you running latest version = "+isLatestVersion);
     }
     
     public static boolean isLatestVersion()

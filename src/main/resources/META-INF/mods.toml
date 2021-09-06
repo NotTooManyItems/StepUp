@@ -1,32 +1,30 @@
-modLoader="javafml"
-loaderVersion="[35,)"
-#issueTrackerURL="http://my.issue.tracker/"
-license="All rights reversed"
+modLoader="javafml" #mandatory
+loaderVersion="[37,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="All rights reserved"
 
-[[mods]]
-modId="stepup"
-version="${version}"
+[[mods]] #mandatory
+modId="stepup" #mandatory
+version="1.17.1-0.1.0" #mandatory
 state="Working"
-displayName="StepUp"
-#updateJSONURL="http://myurl.me/"
-displayURL="https://www.curseforge.com/minecraft/mc-mods/stepup"
-logoFile="logo.png"
-credits="NotTooManyItems, frakier, Emirhangg, Bletch1971"
-authors="NotTooManyItems"
+displayName="StepUp" #mandatory
+displayURL="https://www.curseforge.com/minecraft/mc-mods/stepup" #optional
+logoFile="logo.png" #optional
+credits="NotTooManyItems, frakier, Emirhangg, Bletch1971" #optional
+authors="NotTooManyItems" #optional
 description='''
 3 options allow you to choose between no auto jump, Minecraft auto jump, and StepUp auto jump
 '''
 
-[[dependencies.stepup]]
-modId="forge"
-mandatory=true
-versionRange="[35,)"
-ordering="NONE"
-side="BOTH"
+[[dependencies.stepup]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[37,)" #mandatory
+    ordering="NONE"
+    side="CLIENT"
 
 [[dependencies.stepup]]
-modId="minecraft"
-mandatory=true
-versionRange="[1.16.4,1.17)"
-ordering="NONE"
-side="CLIENT"
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.17.1,1.18)"
+    ordering="NONE"
+    side="CLIENT"

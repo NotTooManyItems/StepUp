@@ -5,9 +5,7 @@ import com.nottoomanyitems.stepup.worker.StepChanger;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
-import net.minecraft.util.Util;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.network.chat.TextComponent;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,11 +19,13 @@ public class ConfigIO{
 	public static String CONFIG_FILE = StepUp.MODID+".cfg";
 	public static String filePath = "config/"+ CONFIG_FILE;
 	public static String serverIP;
-    public static int autoJumpState;
+    public static int autoJumpState = 0;
+    public static int display_start_message = 1;
+    public static int display_update_message = 1;
 
 	public static void ServerIP() {
-		ServerData serverData = Minecraft.getInstance().getCurrentServerData();
-    	serverIP = serverData != null ? serverData.serverIP.replace(".", "") : "0000";
+		ServerData serverData = Minecraft.getInstance().getCurrentServer();
+    	serverIP = serverData != null ? serverData.ip.replace(".", "") : "0000";
 	}
 	
 	public static void createCFG()
@@ -81,7 +81,11 @@ public class ConfigIO{
             while (line != null && !end) 
             {
                 oldContent = oldContent + line + System.lineSeparator();
-                if(line.contains(serverIP)) {
+                if(line.contains("display_start_message")) {
+                	display_start_message = Integer.parseInt(line.substring(line.length()-1, line.length()));
+                }else if(line.contains("display_update_message")) {
+                	display_update_message = Integer.parseInt(line.substring(line.length()-1, line.length()));
+                }else if(line.contains(serverIP)) {
                 	autoJumpStateLine = reader.readLine();
                 	end = true;
                 }
@@ -169,6 +173,6 @@ public class ConfigIO{
     }
     
     public static void debugMessage(String m) {
-    	StepChanger.player.sendMessage((ITextComponent) new StringTextComponent(m), Util.DUMMY_UUID);
+        StepChanger.player.displayClientMessage(new TextComponent(m), true);
     }
 }

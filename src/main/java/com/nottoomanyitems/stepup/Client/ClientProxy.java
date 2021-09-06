@@ -17,10 +17,10 @@ public final class ClientProxy extends StepUpProxy{
 
 	@Override
 	public void onLoaded(FMLLoadCompleteEvent e) {
-		MC_VERSION = Minecraft.getInstance().getVersion();
+		MC_VERSION = Minecraft.getInstance().getLaunchedVersion();
 		
     	VersionChecker versionChecker = new VersionChecker();
         Thread versionCheckThread = new Thread(versionChecker, "Version Check");
-        versionCheckThread.start();		
+        versionCheckThread.start();
 	}
 }

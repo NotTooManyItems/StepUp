@@ -28,15 +28,18 @@ public class ClientEvents {
     	if (event.player != null) {
     		StepChanger.TickEvent(event);
     	}
-    	if (Minecraft.getInstance().isGameFocused() && init == true) {
+    	if (Minecraft.getInstance().isWindowActive() && init == true) {
     		init=false;
     		StepChanger.init();
     	}
     }
     
+	
     @SubscribeEvent
     public static void onKeyInput(KeyInputEvent event) {
-    	StepChanger.onKeyInput(event);
+    	if(StepChanger.firstRun == false) {
+    		StepChanger.onKeyInput(event);
+    	}
     }
     
     
