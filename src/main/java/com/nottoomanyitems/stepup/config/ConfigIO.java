@@ -31,7 +31,7 @@ public class ConfigIO{
 	public static void createCFG()
     {
         File fileToBeModified = new File(filePath);
-        String content = "# Configuration file" + System.lineSeparator() + System.lineSeparator();
+        String content = "# Configuration file" + System.lineSeparator() + "# display_start_message=1" + System.lineSeparator() + "# display_update_message=1" + System.lineSeparator() + System.lineSeparator();
         FileWriter writer = null;
          
         try
