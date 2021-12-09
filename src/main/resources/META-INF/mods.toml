@@ -4,7 +4,7 @@ license="All rights reserved"
 
 [[mods]] #mandatory
 modId="stepup" #mandatory
-version="1.18.0-0.1.0" #mandatory
+version="1.18.0-0.1.1" #mandatory
 state="Working"
 displayName="StepUp" #mandatory
 displayURL="https://www.curseforge.com/minecraft/mc-mods/stepup" #optional

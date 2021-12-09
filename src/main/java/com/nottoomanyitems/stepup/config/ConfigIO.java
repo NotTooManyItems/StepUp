@@ -34,24 +34,20 @@ public class ConfigIO{
         String content = "# Configuration file" + System.lineSeparator() + "# display_start_message=1" + System.lineSeparator() + "# display_update_message=1" + System.lineSeparator() + System.lineSeparator();
         FileWriter writer = null;
          
-        try
-        {
+        try{
             writer = new FileWriter(fileToBeModified);
             writer.write(content);
-        }
-        catch (IOException e)
-        {
+        }catch (IOException e){
             e.printStackTrace();
         }
-        finally
-        {
-            try
-            {
-                //Closing the resources
-                writer.close();
+        finally{
+            try{
+            	if(writer != null) {
+            		//Closing the resources
+            		writer.close();
+            	}
             } 
-            catch (IOException e) 
-            {
+            catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -112,7 +108,9 @@ public class ConfigIO{
             try
             {
                 //Closing the resources
-                reader.close();
+            	if(reader != null){
+            		reader.close();
+            	}
                 if(!end) {
                 	writer.close();
                 }
