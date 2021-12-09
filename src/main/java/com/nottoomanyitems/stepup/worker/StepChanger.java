@@ -51,12 +51,13 @@ public class StepChanger {
 
     public static void init() {
     	ConfigIO.CheckForServerIP();
+    	ConfigIO.updateCFG();
     	int display_update_message = ConfigIO.display_update_message;
     	int display_start_message = ConfigIO.display_start_message;
     	
     	if(firstRun){
     	    myKey =  new KeyMapping("key.stepup.desc", GLFW.GLFW_KEY_H, "key.categories.stepup");
-    	    net.minecraftforge.fmlclient.registry.ClientRegistry.registerKeyBinding(myKey);
+    	    net.minecraftforge.client.ClientRegistry.registerKeyBinding(myKey);
             if (VersionChecker.isLatestVersion() == false && display_update_message == 1) {
                 updateMessage();
             }

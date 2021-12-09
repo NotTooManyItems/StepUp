@@ -28,7 +28,7 @@ public class VersionChecker implements Runnable
     {
         InputStream in = null;
         try{
-            in = new URL("https://pastebin.com/raw/xbERKTgG").openStream();
+            in = new URL("https://pastebin.com/raw/c2wT7miN").openStream();
         }catch (MalformedURLException e){
             // TODO Auto-generated catch block
         	isLatestVersion = true;
