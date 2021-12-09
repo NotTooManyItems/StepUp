@@ -34,24 +34,20 @@ public class ConfigIO{
         String content = "# Configuration file" + System.lineSeparator() + "# display_start_message=1" + System.lineSeparator() + "# display_update_message=1" + System.lineSeparator() + System.lineSeparator();
         FileWriter writer = null;
          
-        try
-        {
+        try{
             writer = new FileWriter(fileToBeModified);
             writer.write(content);
-        }
-        catch (IOException e)
-        {
+        }catch (IOException e){
             e.printStackTrace();
         }
-        finally
-        {
-            try
-            {
-                //Closing the resources
-                writer.close();
+        finally{
+            try{
+            	if(writer != null) {
+            		//Closing the resources
+            		writer.close();
+            	}
             } 
-            catch (IOException e) 
-            {
+            catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -95,7 +91,7 @@ public class ConfigIO{
             //If serverIP wasn't found create new entry at the end
             if(!end) {
             	autoJumpState = 0;
-            	oldContent = oldContent + serverIP+" {" + System.lineSeparator() +"    S:autoJumpState="+autoJumpState + System.lineSeparator() + "}" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() ;
+            	oldContent = oldContent + serverIP+" {" + System.lineSeparator() +"    S:autoJumpState="+autoJumpState + System.lineSeparator() + "}" + System.lineSeparator() + System.lineSeparator();
             	writer = new FileWriter(fileToBeModified);
                 writer.write(oldContent);
             }else {
@@ -112,7 +108,9 @@ public class ConfigIO{
             try
             {
                 //Closing the resources
-                reader.close();
+            	if(reader != null){
+            		reader.close();
+            	}
                 if(!end) {
                 	writer.close();
                 }
@@ -137,6 +135,27 @@ public class ConfigIO{
              
             //Reading all the lines of input text file into oldContent
             String line = reader.readLine();
+            
+            if(!line.contains("# Configuration file")) {
+            	oldContent = oldContent + "# Configuration file" + System.lineSeparator();
+            }else {
+            	oldContent = oldContent + line + System.lineSeparator();
+            	line = reader.readLine();
+            }
+            
+            if(!line.contains("display_start_message")) {
+            	oldContent = oldContent + "# display_start_message=1" + System.lineSeparator();
+            }else{
+            	oldContent = oldContent + line + System.lineSeparator();
+            	line = reader.readLine();
+            }
+            
+            if(!line.contains("display_update_message")) {
+            	oldContent = oldContent + "# display_update_message=1" + System.lineSeparator() + System.lineSeparator();
+            }else{
+            	oldContent = oldContent + line + System.lineSeparator() + System.lineSeparator();
+            	line = reader.readLine();
+            }
              
             while (line != null) 
             {

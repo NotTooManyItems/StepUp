@@ -51,6 +51,7 @@ public class StepChanger {
 
     public static void init() {
     	ConfigIO.CheckForServerIP();
+    	ConfigIO.updateCFG();
     	int display_update_message = ConfigIO.display_update_message;
     	int display_start_message = ConfigIO.display_start_message;
     	
